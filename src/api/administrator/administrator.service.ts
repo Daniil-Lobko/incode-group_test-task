@@ -28,8 +28,7 @@ export class AdministratorService {
 
     results.forEach((result) => {
       const bossName = Object.keys(result)[0];
-      // @ts-ignore
-      json[bossName] = result[bossName];
+      json[bossName] = result[bossName].regularUsers;
     });
     return json;
   }

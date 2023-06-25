@@ -45,10 +45,9 @@ export class BossService {
 
   public async updateBoss(body: UpdateBossDto): Promise<RegularUser> {
     const user: RegularUser = await this.repositoryUser.findOne({
-      where: { phone: body.user },
+      where: { phone: body.user, bossId: body.id },
       relations: ['boss'], // Включаем связь с боссом
     });
-    console.log(user);
     if (user) {
       const boss: Boss = await this.repository.findOne({
         where: { id: body.newBossId },

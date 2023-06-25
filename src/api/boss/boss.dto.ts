@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateBossDto {
   @IsString()
@@ -15,6 +15,10 @@ export class CreateBossDto {
 }
 
 export class UpdateBossDto {
+  @IsNumber()
+  @IsNotEmpty()
+  public id: number;
+
   @IsString()
   @IsNotEmpty()
   public name: string;
