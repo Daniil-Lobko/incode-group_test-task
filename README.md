@@ -1,73 +1,81 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Organization User Structure Management App
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is a tiny server application built with **Node.js** using **TypeScript**. NestJS is used as a framework to provide a robust and scalable structure. The application allows you to manage a simple organization user structure.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## User Roles
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+1. Administrator: The top-most user with full access and control over the organization's user structure.
+2. Boss: Users with subordinates. They can manage their own subordinates and perform specific operations.
+3. Regular User: Users without subordinates. They have limited access and can perform basic operations.
+
+## API Endpoints
+
+### Administrator Controller
+
+- **Endpoint:** `GET /administrator`
+- **Description:** Get all regular users.
+- **Response:** An array of `RegularUser` objects representing the users.
+
+### Boss Controller
+
+- **Endpoint:** `GET /boss/:id`
+- **Description:** Get a boss by ID.
+- **Parameters:**
+    - `id` (path parameter): The ID of the boss.
+- **Response:** The `Boss` object representing the boss.
+######
+- **Endpoint:** `GET /boss`
+- **Description:** Get all bosses.
+- **Response:** An array of `Boss` objects representing the bosses.
+######
+- **Endpoint:** `GET /boss/getSubordinates/:id`
+- **Description:** Get the subordinates of a boss by ID.
+- **Parameters:**
+    - `id` (path parameter): The ID of the boss.
+- **Response:** An array of `RegularUser` objects representing the subordinates.
+######
+- **Endpoint:** `POST /boss`
+- **Description:** Create a new boss.
+- **Request Body:** JSON object containing the boss details.
+- **Response:** The created `Boss` object representing the new boss.
+######
+- **Endpoint:** `PUT /boss/update-boss`
+- **Description:** Update a boss.
+- **Request Body:** JSON object containing the boss details to be updated.
+- **Response:** The updated `RegularUser` object representing the boss.
+######
+### User Controller
+
+- **Endpoint:** `GET /regularUser/:id`
+- **Description:** Get a regular user by ID.
+- **Parameters:**
+    - `id` (path parameter): The ID of the regular user.
+- **Response:** The `RegularUser` object representing the user.
+######
+- **Endpoint:** `GET /regularUser`
+- **Description:** Get all regular users.
+- **Response:** An array of `RegularUser` objects representing the users.
+######
+- **Endpoint:** `POST /regularUser`
+- **Description:** Create a new regular user.
+- **Request Body:** JSON object containing the user details.
+- **Response:** The created `RegularUser` object representing the new user.
+######
 
 ## Installation
 
-```bash
-$ npm install
-```
+To run the application locally, follow these steps:
 
-## Running the app
+1. Clone the repository: `gh repo clone Daniil-Lobko/incode-group_test-task`
+2. Install dependencies: `npm install`
+3. Configure environment variables: Create a `.env` file and provide the necessary configuration settings for the application.
+4. Start the application: Run `npm start` to start the server.
 
-```bash
-# development
-$ npm run start
+## Technology Stack
 
-# watch mode
-$ npm run start:dev
+The application is built using the following technologies:
 
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Node.js (Nest.js)
+- TypeScript
+- TypeORM
